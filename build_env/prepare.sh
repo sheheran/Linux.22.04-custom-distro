@@ -1,7 +1,7 @@
 #Distribution Root and LFS variables
 echo "Dist Root: ${DIST_ROOT:?}"
 echo "LFS: ${LFS:?}"
-#export DIST_ROOT=/home/minindu/custom_distro
+#export DIST_ROOT=/home/minindu/Documents/Linux.22.04-custom-distro
 #export LFS=$DIST_ROOT/build_env/build_root
 #ls -ls $LFS/
 mkdir $LFS/sources
@@ -46,7 +46,9 @@ if ! test $(id -u minmin) ; then # Only if user dosen't exist run to create the 
     useradd -s /bin/bash -g minmin -m -k /dev/null minmin
     passwd minmin
     # Change the ownership of the different directoreies
-    chown -v minmin $LSF/{usr{,/*},lib,var,etc,bin,sbin}
+    chown -v minmin $LFS/{usr,lib,var,etc,bin,sbin}
+    chown -v minmin $LFS/usr/*
+
     # Selecting between x64 and x86
     case $(uname -m) in
     x86_64) chown -v minmin $LFS/lib64 ;;
@@ -56,25 +58,26 @@ if ! test $(id -u minmin) ; then # Only if user dosen't exist run to create the 
     dbhome=$(eval echo ~minmin)
     # cat and Redirect to the given file, until the input EOF is found
     cat > $dbhome/.bash_profile << "EOF"
-    exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
 
     # Creating the bash.rc file
     cat > $dbhome/.bashrc << EOF
-    set +h
-    umask 022
-    LFS=/mnt/$LSF
-    DIST_ROOT=$DIST_ROOT
+set +h
+umask 022
+LFS=$LFS
+DIST_ROOT=$DIST_ROOT
 EOF
 
     cat >> $dbhome/.bashrc << "EOF"
-    LC_ALL=POSIX
-    LFS_TGT=$(uname -m)-lfs-linux-gnu
-    PATH=/usr/bin
-    if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
-    PATH=$LFS/tools/bin:$PATH
-    CONFIG_SITE=$LFS/usr/share/config.site
-    export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
+LC_ALL=POSIX
+LFS_TGT=$(uname -m)-lfs-linux-gnu
+PATH=/usr/bin
+if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
+PATH=$LFS/tools/bin:$PATH
+CONFIG_SITE=$LFS/usr/share/config.site
+export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
+export MAKEFLAGS="-j$(nproc)"
 EOF
 
 fi
