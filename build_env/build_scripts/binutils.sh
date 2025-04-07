@@ -16,7 +16,7 @@ cd       build
 
 
 make
-make install #DESTDIR=$LFS
+make install DESTDIR=$LFS
 
 
 cd $LFS/sources

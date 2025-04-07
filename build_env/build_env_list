@@ -1,2 +1,5 @@
 https://sourceware.org/pub/binutils/releases/binutils-2.43.1.tar.xz
 https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz
+https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz
+https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz
+https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.13.4.tar.xz

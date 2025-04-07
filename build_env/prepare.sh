@@ -1,7 +1,7 @@
 #Distribution Root and LFS variables
 echo "Dist Root: ${DIST_ROOT:?}"
 echo "LFS: ${LFS:?}"
-# export DIST_ROOT=/home/minindu/Documents/Linux.22.04-custom-distro
+# export DIST_ROOT=/minindu-minmin/Linux.22.04-custom-distro
 # export LFS=$DIST_ROOT/build_env/build_root
 #ls -ls $LFS/
 mkdir $LFS/sources
